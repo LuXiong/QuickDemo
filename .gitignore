@@ -1,5 +1,8 @@
 # Compiled Lua sources
 luac.out
+framework
+runtime
+cocos
 
 # luarocks build files
 *.src.rock
