@@ -1,0 +1,89 @@
+
+{
+	gl.supports_vertex_array_object: true
+	cocos2d.x.version: quick-cocos2d-x 3.3
+	gl.vendor: NVIDIA Corporation
+	gl.supports_PVRTC: false
+	gl.renderer: NVIDIA GeForce GT 750M OpenGL Engine
+	cocos2d.x.compiled_with_profiler: false
+	gl.max_texture_size: 16384
+	gl.supports_ETC1: false
+	gl.supports_BGRA8888: false
+	cocos2d.x.build_type: DEBUG
+	gl.supports_discard_framebuffer: false
+	gl.supports_NPOT: true
+	gl.supports_S3TC: true
+	gl.version: 2.1 NVIDIA-10.8.14 310.42.15f01
+	gl.supports_ATITC: false
+	gl.max_texture_units: 16
+	cocos2d.x.compiled_with_gl_state_cache: true
+}
+
+
+Quick-Cocos2d-x C++ support ready.
+------------------------------------------------
+LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
+------------------------------------------------
+[LUA-print] ===========================================================
+[LUA-print]               LOAD QUICK FRAMEWORK
+[LUA-print] ===========================================================
+[LUA-print] [INFO] 
+[LUA-print] [INFO] # DEBUG                        = 1
+[LUA-print] [INFO] #
+[LUA-print] [INFO] # device.platform              = mac
+[LUA-print] [INFO] # device.model                 = unknown
+[LUA-print] [INFO] # device.language              = cn
+[LUA-print] [INFO] # device.writablePath          = /Users/xiongl/QuickDemo/chess/
+[LUA-print] [INFO] # device.directorySeparator    = /
+[LUA-print] [INFO] # device.pathSeparator         = :
+[LUA-print] [INFO] #
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] 11
+[LUA-print] 14
+[LUA-print] 17
+[LUA-print] 110
+[LUA-print] 21
+[LUA-print] 23
+[LUA-print] 28
+[LUA-print] 210
+[LUA-print] 31
+[LUA-print] 34
+[LUA-print] 37
+[LUA-print] 310
+[LUA-print] 41
+[LUA-print] 410
+[LUA-print] 51
+[LUA-print] 54
+[LUA-print] 57
+[LUA-print] 510
+[LUA-print] 61
+[LUA-print] 610
+[LUA-print] 71
+[LUA-print] 74
+[LUA-print] 77
+[LUA-print] 710
+[LUA-print] 81
+[LUA-print] 83
+[LUA-print] 88
+[LUA-print] 810
+[LUA-print] 91
+[LUA-print] 94
+[LUA-print] 97
+[LUA-print] 910
+if the index doesn't exist, it is an error
+touchesEnded or touchesCancel: size = 0

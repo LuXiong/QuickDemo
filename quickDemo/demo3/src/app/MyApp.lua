@@ -11,7 +11,9 @@ end
 
 function MyApp:run()
     cc.FileUtils:getInstance():addSearchPath("res/")
+    cc.Director:getInstance():setContentScaleFactor( 640/CONFIG_SCREEN_HEIGHT )
     self:enterScene("MainScene")
+
 end
 
 return MyApp
