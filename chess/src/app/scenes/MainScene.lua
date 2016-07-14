@@ -167,22 +167,18 @@ function MainScene:refreshBoard(isadd)
 			
 			local piece = chessPieces[math.abs(chessBoard[i][j])]
 			if piece then
+                piece:align(display.CENTER, (i-1)*109+116, (j-1)*109+64)
 				if isadd then
-					piece:align(display.CENTER, (i-1)*109+116, (j-1)*109+64)
-					:addTo(img)
+					piece:addTo(img)
 				end
 				local lastX = chessBoard[10][1]
 				local lastY = chessBoard[10][2]
 				if lastX>0 and lastY>0 then
 					if chessBoard[lastX][lastY]>0 then
-						img_selected:align(display.CENTER, (lastX-1)*109+116, (lastY-1)*109+75)
+						img_selected:align(display.CENTER, (lastX-1)*109+116, (lastY-1)*109+64)
 						img_selected:show()
 					end
 					
-					-- print("chessBoard[i][j]:"..tostring(chessBoard[i][j]))
-					-- img_selected:addTo(piece,1,-1)
-				-- else
-				-- 	img_selected:removeSelf()
 				end
 			end
 			
@@ -193,6 +189,8 @@ function MainScene:refreshBoard(isadd)
 end
 
 function MainScene:ctor()
+
+    self.side = -1
 
 	local chessScale = 1;
 	if display.height<1111 then
@@ -220,27 +218,78 @@ function MainScene:ctor()
 	self:initPieces()
 	self:initBoard()
 	self:refreshBoard(true)
-	-- chessBoard[1][1] = chessBoard[1][1]*-1
- --    self:refreshBoard(false)
  	img:setTouchEnabled(true)
 	img:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
 
         			local m = math.floor((event.x/chessScale-62)/109)+1
         			local n = math.floor((event.y/chessScale-21)/109)+1
-        			print("x:"..tostring(event.x).."    y:"..tostring(event.y))
-        			print("m:"..tostring(m).."    n:"..tostring(n))
-        			chessBoard[10][1] = m
-        			chessBoard[10][2] = n
-        			-- print("chessBoard:"..tostring(chessBoard[1][2]))
-     --    			local piecee = chessPieces[chessBoard[m][n]]
-					-- if piecee then
-					-- 	chessBoard[m][n] = chessBoard[m][n]*-1
-						self:refreshBoard(false)
-					-- end
+
+                    local preM = chessBoard[10][1]
+                    local preN = chessBoard[10][2]
+
+
+                    --如果没有选中，那么选中对应棋子
+                    if preM == 0 and preN == 0 then
+
+                        if m > 0 and n > 0 and chessBoard[m][n] > 0 then
+
+                            --不到你走棋
+                            if (self.side == 1 and chessBoard[m][n] <= 16)  or (self.side == -1 and chessBoard[m][n] > 16)  then
+                                return
+                            end
+
+                            chessBoard[10][1] = m
+                            chessBoard[10][2] = n
+                        end
+
+                        -- return
+                    end
+
+
+                    --如果已经选中一个棋子，那么就可以对当前棋子进行操作
+                    if preM > 0 and preN > 0 then
+                        local isEnimy = (chessBoard[preM][preN]>0 and chessBoard[m][n]>16 and chessBoard[preM][preN]<=16) or (chessBoard[preM][preN]>16 and chessBoard[m][n]>0 and chessBoard[m][n]<=16)
+                        local isPartener = (chessBoard[preM][preN]>0 and chessBoard[m][n]>0 and chessBoard[preM][preN]<=16 and chessBoard[m][n]<=16) or (chessBoard[preM][preN]>16 and chessBoard[m][n]>16 )
+                         --消除
+                        chessBoard[10][1] = 0
+                        chessBoard[10][2] = 0
+
+
+                        --不是友军则可以走子
+                        if not isPartener then
+                            --如果是敌人，那么吃子
+                            if isEnimy then
+                                 chessPieces[chessBoard[m][n]]:removeSelf()
+                            end
+
+                            --其他情况直接走子
+                            chessBoard[m][n] = chessBoard[preM][preN]
+                            chessBoard[preM][preN] = 0
+
+                            --走棋结束需要变换阵营
+                            self.side = self.side * -1
+
+                        else --如果是友军，那么更换选中
+
+                            chessBoard[10][1] = m
+                            chessBoard[10][2] = n
+
+                        end
+            
+                    end
+
+					self:refreshBoard(false)
+
         		return false
     end)
 
 
+end
+
+function moveChess( board,from,to )
+    --符合规则，马规则车规则等
+    --车规则
+    -- board.x == 
 end
 
 function MainScene:onEnter()
