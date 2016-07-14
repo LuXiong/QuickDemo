@@ -39,6 +39,12 @@ LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
 [LUA-print] [INFO] #
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] displaySize:1280   853.33331298828
+libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] img layoutSize:845.6525450946   853.33331298828
+[LUA-print] img padding:0   0   0   0
+[LUA-print] img position:423.21029663086   427.05068969727   nil   nil
+[LUA-print] img contentSize:table: 0x7f917fa0d960   nil
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
@@ -53,37 +59,26 @@ libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] 11
-[LUA-print] 14
-[LUA-print] 17
-[LUA-print] 110
-[LUA-print] 21
-[LUA-print] 23
-[LUA-print] 28
-[LUA-print] 210
-[LUA-print] 31
-[LUA-print] 34
-[LUA-print] 37
-[LUA-print] 310
-[LUA-print] 41
-[LUA-print] 410
-[LUA-print] 51
-[LUA-print] 54
-[LUA-print] 57
-[LUA-print] 510
-[LUA-print] 61
-[LUA-print] 610
-[LUA-print] 71
-[LUA-print] 74
-[LUA-print] 77
-[LUA-print] 710
-[LUA-print] 81
-[LUA-print] 83
-[LUA-print] 88
-[LUA-print] 810
-[LUA-print] 91
-[LUA-print] 94
-[LUA-print] 97
-[LUA-print] 910
-if the index doesn't exist, it is an error
-touchesEnded or touchesCancel: size = 0
+[LUA-print] tag:-1
+[LUA-print] x:337.36975097656    y:298.921875
+[LUA-print] m:4    n:4
+[LUA-print] x:278.98959350586    y:298.921875
+[LUA-print] m:3    n:4
+[LUA-print] x:408.30725097656    y:298.921875
+[LUA-print] m:5    n:4
+[LUA-print] x:415.61978149414    y:204.6457824707
+[LUA-print] m:5    n:3
+[LUA-print] x:330.88537597656    y:199.70310974121
+[LUA-print] m:4    n:3
+[LUA-print] x:316.01040649414    y:62.265625
+[LUA-print] m:4    n:1
+[LUA-print] x:430.40625    y:137.41143798828
+[LUA-print] m:5    n:2
+[LUA-print] x:269.703125    y:321.453125
+[LUA-print] m:3    n:4
+[LUA-print] x:274.64584350586    y:534.72393798828
+[LUA-print] m:3    n:7
+[LUA-print] x:260.80206298828    y:310.875
+[LUA-print] m:3    n:4
+[LUA-print] x:249.02603149414    y:566.66143798828
+[LUA-print] m:3    n:7
