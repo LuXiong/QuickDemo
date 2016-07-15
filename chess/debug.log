@@ -2,9 +2,9 @@
 {
 	gl.supports_vertex_array_object: true
 	cocos2d.x.version: quick-cocos2d-x 3.3
-	gl.vendor: Intel Inc.
+	gl.vendor: NVIDIA Corporation
 	gl.supports_PVRTC: false
-	gl.renderer: Intel(R) Iris(TM) Graphics 6100
+	gl.renderer: NVIDIA GeForce GT 750M OpenGL Engine
 	cocos2d.x.compiled_with_profiler: false
 	gl.max_texture_size: 16384
 	gl.supports_ETC1: false
@@ -13,7 +13,7 @@
 	gl.supports_discard_framebuffer: false
 	gl.supports_NPOT: true
 	gl.supports_S3TC: true
-	gl.version: 2.1 INTEL-10.12.13
+	gl.version: 2.1 NVIDIA-10.8.14 310.42.15f01
 	gl.supports_ATITC: false
 	gl.max_texture_units: 16
 	cocos2d.x.compiled_with_gl_state_cache: true
@@ -22,7 +22,7 @@
 
 Quick-Cocos2d-x C++ support ready.
 ------------------------------------------------
-LOAD LUA FILE: /Users/xionglu/QuickDemo/chess/src/main.lua
+LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
 ------------------------------------------------
 [LUA-print] ===========================================================
 [LUA-print]               LOAD QUICK FRAMEWORK
@@ -33,37 +33,13 @@ LOAD LUA FILE: /Users/xionglu/QuickDemo/chess/src/main.lua
 [LUA-print] [INFO] # device.platform              = mac
 [LUA-print] [INFO] # device.model                 = unknown
 [LUA-print] [INFO] # device.language              = cn
-[LUA-print] [INFO] # device.writablePath          = /Users/xionglu/QuickDemo/chess/
+[LUA-print] [INFO] # device.writablePath          = /Users/xiongl/QuickDemo/chess/
 [LUA-print] [INFO] # device.directorySeparator    = /
 [LUA-print] [INFO] # device.pathSeparator         = :
 [LUA-print] [INFO] #
 libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
-[LUA-print] [INFO] # CONFIG_SCREEN_WIDTH          = 1280.00
-[LUA-print] [INFO] # CONFIG_SCREEN_HEIGHT         = 853.33
-[LUA-print] [INFO] # display.widthInPixels        = 960.00
-[LUA-print] [INFO] # display.heightInPixels       = 640.00
-[LUA-print] [INFO] # display.contentScaleFactor   = 0.75
-[LUA-print] [INFO] # display.width                = 1280.00
-[LUA-print] [INFO] # display.height               = 853.33
-[LUA-print] [INFO] # display.cx                   = 640.00
-[LUA-print] [INFO] # display.cy                   = 426.67
-[LUA-print] [INFO] # display.left                 = 0.00
-[LUA-print] [INFO] # display.right                = 1280.00
-[LUA-print] [INFO] # display.top                  = 853.33
-[LUA-print] [INFO] # display.bottom               = 0.00
-[LUA-print] [INFO] # display.c_left               = -640.00
-[LUA-print] [INFO] # display.c_right              = 640.00
-[LUA-print] [INFO] # display.c_top                = 426.67
-[LUA-print] [INFO] # display.c_bottom             = -426.67
-[LUA-print] [INFO] #
 libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] displaySize:1280   853.33331298828
 libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] img layoutSize:845.6525450946   853.33331298828
-[LUA-print] img padding:0   0   0   0
-[LUA-print] img position:423.21029663086   427.05068969727   nil   nil
-[LUA-print] img contentSize:table: 0x7fc33f0a80a0   nil
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
@@ -79,3 +55,54 @@ libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] tag:-1
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:561.71655273438   545.79229736328
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:590.67340087891   182.7904510498
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:347.37237548828   193.94367980957
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:203.07220458984   476.98065185547
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:206.41284179688   406.46566772461
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:371.60211181641   171.34240722656
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:356.5625   473.56512451172
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:238.38027954102   388.04577636719
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:216.65493774414   56.870635986328
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:350.98150634766   669.87237548828
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:362.6760559082   685.70861816406
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:364.34860229492   424.64788818359
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:364.34860229492   453.34506225586
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:357.66284179688   678.91284179688
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:148.77200317383   30.224487304688
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:238.79840087891   55.035217285156
+[LUA-print] img:357.64251708984   360.88793945312
+[LUA-print] display:1280   721.12677001953
+[LUA-print] event:283.16021728516   41.668151855469
+[LUA-print] img:357.64251708984   360.88793945312
