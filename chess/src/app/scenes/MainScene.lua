@@ -51,17 +51,68 @@ end
 function MainScene:ctor()
 
     self.side = -1
+    self.voiceOpen = 1
+    self.n_redTime = 0
+    self.n_blackTime = 0
+    -- self.schedulert = scheduler.scheduleGlobal(scheduleUpdateScene, 1)
 
-	local chessScale = 1;
+	local chessScale = 1
 	if display.height<1111 then
 		chessScale = display.height/1111
 	end
 
+
+    self.floor = display.newScale9Sprite("floor.jpg",0,0,CCSize(display.width, display.height))
+            :align(display.CENTER, display.width/2, display.height/2)
+            :addTo(self)
+
 	img = cc.ui.UIImage.new("background.png")
 			:align(display.CENTER, 551*chessScale, 556*chessScale)
-			:setLayoutSize(1101*chessScale, 1111*chessScale)
+			:setLayoutSize(1101*chessScale-20, 1111*chessScale-20)
 			:setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
 			:addTo(self)
+
+    self.img_voice = cc.ui.UIPushButton.new("openVolice.png")
+                        :align(display.CENTER, display.width-50, display.height-50)
+                        :onButtonClicked(function()
+                            self:changeVoiceState()
+                        end)
+                        :addTo(self.floor)
+    
+
+    self.lbl_red = cc.ui.UILabel.new({text = "00:00",size = 30, color = cc.c3b(120, 120, 120)})
+                        :align(display.CENTER, display.width/2+551*chessScale, 150)
+                        :addTo(self.floor)
+    self.lbl_redName = cc.ui.UILabel.new({text = "Xlook",size = 42, color = cc.c3b(255, 0, 0)})
+                        :align(display.CENTER, display.width/2+551*chessScale, 90)
+                        :addTo(self.floor) 
+    self.lbl_black = cc.ui.UILabel.new({text = "00:00",size = 30, color = cc.c3b(120, 120, 120)})
+                        :align(display.CENTER, display.width/2+551*chessScale, display.height - 150)
+                        :addTo(self.floor)
+    self.lbl_redName = cc.ui.UILabel.new({text = "电脑",size = 42, color = cc.c3b(0, 0, 0)})
+                        :align(display.CENTER, display.width/2+551*chessScale, display.height - 90)
+                        :addTo(self.floor) 
+
+    self.btn_start = cc.ui.UIPushButton.new("new.jpg")
+                        :align(display.CENTER, display.width/2+551*chessScale, display.height/2+100)
+                        :onButtonClicked(function()
+                            -- body
+                        end)
+                        :addTo(self.floor)
+
+    self.btn_pause = cc.ui.UIPushButton.new("pause.jpg")
+                        :align(display.CENTER, display.width/2+551*chessScale, display.height/2)
+                        :onButtonClicked(function()
+                            -- body
+                        end)
+                        :addTo(self.floor)
+
+
+    self.btn_regret = cc.ui.UIPushButton.new("regret.jpg")
+                        :align(display.CENTER, display.width/2+551*chessScale, display.height/2-100)
+                        :addTo(self.floor)
+
+
 
 	self:initPieces()
 	self:initBoard()
@@ -72,9 +123,9 @@ function MainScene:ctor()
         			local m = math.floor((event.x/chessScale-62)/109)+1
         			local n = math.floor((event.y/chessScale-21)/109)+1
 
-                    print("display:"..tostring(display.width).."   "..tostring(display.height))
-                    print("event:"..tostring(event.x).."   "..tostring(event.y))
-                    print("img:"..tostring(img:getPositionX()).."   "..tostring(img:getPositionY()))
+                    -- print("display:"..tostring(display.width).."   "..tostring(display.height))
+                    -- print("event:"..tostring(event.x).."   "..tostring(event.y))
+                    -- print("img:"..tostring(img:getPositionX()).."   "..tostring(img:getPositionY()))
 
                     local preM = chessBoard[10][1]
                     local preN = chessBoard[10][2]
@@ -124,6 +175,8 @@ function MainScene:ctor()
 
 end
 
+
+
 function MainScene:moveChess(custom,fromM,fromeN,target,toM,toN)
     local chesspiece = chessPieces[custom]  
     max_zorder = max_zorder+1
@@ -148,6 +201,33 @@ function MainScene:moveChess(custom,fromM,fromeN,target,toM,toN)
     --车规则
     -- local target = chessPieces[ chessBoard[fromX][fromY] ]
     -- transition.moveTo(target, {time = 0.3, x = toX*109+116, y = toY*109+64})
+end
+
+function MainScene:scheduleStart( ... )
+    -- body
+end
+
+function MainScene:schedulePause( ... )
+    -- body
+end
+
+function MainScene:scheduleExchange( ... )
+    -- body
+end
+
+function MainScene:scheduleUpdateScene(dt)
+    self.n_redTime = self.n_redTime+dt
+    print(tostring(self.n_redTime))
+end
+
+function MainScene:changeVoiceState()
+    if self.voiceOpen >0 then
+        self.img_voice:setButtonImage(cc.ui.UIPushButton.NORMAL,"closeVolice.png")
+    else
+        self.img_voice:setButtonImage(cc.ui.UIPushButton.NORMAL,"openVolice.png")
+    end
+
+    self.voiceOpen = self.voiceOpen * -1
 end
 
 function pushHistory()
