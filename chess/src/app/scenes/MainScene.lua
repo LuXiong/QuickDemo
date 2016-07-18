@@ -3,19 +3,25 @@ local MainScene = class("MainScene", function()
 	return display.newScene("MainScene")
 	end)
 
-chessPieces = {}
-chessBoard = {}
-chessHistory = {}
+local ChessBoard = require("app.scenes.ChessBoard")
+local chessBoard = ChessBoard.chessBoard
+local chesspieces = ChessBoard.chesspieces
+
+for k,v in pairs(chesspieces) do
+    print(k,v)
+end
+
+local img_selected = ChessBoard.img_selected
 
 max_zorder = 1
 
-img_selected = cc.ui.UIImage.new("selected.png")
-    			:align(display.CENTER, 54, 54)
-    			:setLayoutSize(109, 109)
-    			:setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
+n_stack_top = 0
+
+
 
 
 function MainScene:refreshBoard(isadd)
+
 	if isadd then
 		img_selected:addTo(img)
 	end
@@ -50,11 +56,14 @@ end
 
 function MainScene:ctor()
 
-    self.side = -1
+
+
+    n_side = -1
     self.voiceOpen = 1
-    self.n_redTime = 0
-    self.n_blackTime = 0
-    -- self.schedulert = scheduler.scheduleGlobal(scheduleUpdateScene, 1)
+    n_redTime = 0
+    n_blackTime = 0
+    scheduler = require("framework.scheduler")  
+    n_pause = 1
 
 	local chessScale = 1
 	if display.height<1111 then
@@ -78,8 +87,7 @@ function MainScene:ctor()
                             self:changeVoiceState()
                         end)
                         :addTo(self.floor)
-    
-
+    -- self.img_voice:setRotation(90)
     self.lbl_red = cc.ui.UILabel.new({text = "00:00",size = 30, color = cc.c3b(120, 120, 120)})
                         :align(display.CENTER, display.width/2+551*chessScale, 150)
                         :addTo(self.floor)
@@ -96,14 +104,14 @@ function MainScene:ctor()
     self.btn_start = cc.ui.UIPushButton.new("new.jpg")
                         :align(display.CENTER, display.width/2+551*chessScale, display.height/2+100)
                         :onButtonClicked(function()
-                            -- body
+                            self:scheduleStart()
                         end)
                         :addTo(self.floor)
 
     self.btn_pause = cc.ui.UIPushButton.new("pause.jpg")
                         :align(display.CENTER, display.width/2+551*chessScale, display.height/2)
                         :onButtonClicked(function()
-                            -- body
+                            self:schedulePause()
                         end)
                         :addTo(self.floor)
 
@@ -112,13 +120,13 @@ function MainScene:ctor()
                         :align(display.CENTER, display.width/2+551*chessScale, display.height/2-100)
                         :addTo(self.floor)
 
-
-
-	self:initPieces()
-	self:initBoard()
 	self:refreshBoard(true)
  	img:setTouchEnabled(true)
 	img:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
+
+                    if n_pause == 1 then
+                        return false
+                    end
 
         			local m = math.floor((event.x/chessScale-62)/109)+1
         			local n = math.floor((event.y/chessScale-21)/109)+1
@@ -137,7 +145,7 @@ function MainScene:ctor()
                     if preM == 0 and preN == 0 then
                         if m > 0 and n > 0 and chessBoard[m][n] > 0 then
                             --不到你走棋
-                            if (self.side == 1 and chessBoard[m][n] <= 16)  or (self.side == -1 and chessBoard[m][n] > 16)  then
+                            if (n_side == 1 and chessBoard[m][n] <= 16)  or (n_side == -1 and chessBoard[m][n] > 16)  then
                                 return
                             end
                             chessBoard[10][1] = m
@@ -162,7 +170,7 @@ function MainScene:ctor()
                             self:moveChess(chessBoard[preM][preN],preM,preN,chessBoard[m][n],m,n)
 
                             --走棋结束需要变换阵营
-                            self.side = self.side * -1
+                            n_side = n_side * -1
 
                         else --如果是友军，那么更换选中并且刷新
                             chessBoard[10][1] = m
@@ -182,6 +190,7 @@ function MainScene:moveChess(custom,fromM,fromeN,target,toM,toN)
     max_zorder = max_zorder+1
     chesspiece:zorder(max_zorder)
     local piecescale = 109/56
+
     if target>0 then
         chessPieces[target]:removeSelf()
         transition.scaleTo(chesspiece, {time = 0.3, scale = piecescale*2})
@@ -204,20 +213,53 @@ function MainScene:moveChess(custom,fromM,fromeN,target,toM,toN)
 end
 
 function MainScene:scheduleStart( ... )
-    -- body
+    print("start")
+    n_pause = 0
+    schedule_useTime = scheduler.scheduleGlobal(function()
+        self:scheduleUpdateScene()
+    end, 1)
 end
 
 function MainScene:schedulePause( ... )
-    -- body
+    if n_pause == 0 then
+        scheduler.unscheduleGlobal(schedule_useTime)
+        n_pause = 1
+    else
+        schedule_useTime = scheduler.scheduleGlobal(function()
+        self:scheduleUpdateScene()
+    end, 1)
+        n_pause = 0
+    end
+    
 end
 
 function MainScene:scheduleExchange( ... )
     -- body
 end
 
-function MainScene:scheduleUpdateScene(dt)
-    self.n_redTime = self.n_redTime+dt
-    print(tostring(self.n_redTime))
+function MainScene:scheduleUpdateScene()
+    if n_side<0 then
+        n_redTime = n_redTime+1
+        self.lbl_red:setString(timeToString(n_redTime))
+    else
+        n_blackTime = n_blackTime+1
+        self.lbl_black:setString(timeToString(n_blackTime))
+    end
+
+
+
+    -- n_redTime = n_redTime+dt
+    print("time"..tostring(n_redTime).."   "..tostring(n_blackTime))
+    -- if n_redTime>3 then
+    --     scheduler.unscheduleGlobal(schedule_useTime)
+    -- end
+end
+
+function timeToString(dt)
+    local s = dt%60
+    local h = dt/60
+
+    return string.format("%02d:%02d", h,s)
 end
 
 function MainScene:changeVoiceState()
@@ -230,15 +272,13 @@ function MainScene:changeVoiceState()
     self.voiceOpen = self.voiceOpen * -1
 end
 
-function pushHistory()
-    local top = chessHistory[#chessHistory]
-    if top then
-        --todo
-    end
+function MainScene:pushHistory()
+    -- local top = chessHistory[#chessHistory]
+    
 
 end
 
-function popHistory()
+function MainScene:popHistory()
 end
 
 function MainScene:onEnter()
@@ -247,144 +287,6 @@ end
 function MainScene:onExit()
 end
 
-function MainScene:initPieces()
-    img_bc1 = cc.ui.UIImage.new("bche.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bm1 = cc.ui.UIImage.new("bma.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bx1 = cc.ui.UIImage.new("bxiang.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bs1 = cc.ui.UIImage.new("bshi.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bc2 = cc.ui.UIImage.new("bche.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bm2 = cc.ui.UIImage.new("bma.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bx2 = cc.ui.UIImage.new("bxiang.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bs2 = cc.ui.UIImage.new("bshi.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bj = cc.ui.UIImage.new("bjiang.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bp1 = cc.ui.UIImage.new("bpao.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bp2 = cc.ui.UIImage.new("bpao.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bz1 = cc.ui.UIImage.new("bzu.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bz2 = cc.ui.UIImage.new("bzu.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bz3 = cc.ui.UIImage.new("bzu.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bz4 = cc.ui.UIImage.new("bzu.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_bz5 = cc.ui.UIImage.new("bzu.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rc1 = cc.ui.UIImage.new("rche.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rm1 = cc.ui.UIImage.new("rma.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rx1 = cc.ui.UIImage.new("rxiang.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rs1 = cc.ui.UIImage.new("rshi.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rc2 = cc.ui.UIImage.new("rche.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rm2= cc.ui.UIImage.new("rma.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rx2 = cc.ui.UIImage.new("rxiang.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rs2 = cc.ui.UIImage.new("rshi.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rj = cc.ui.UIImage.new("rshuai.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rp1 = cc.ui.UIImage.new("rpao.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rp2 = cc.ui.UIImage.new("rpao.png")
-                -- :align(display.CENTER, display.cx, display.cy)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rz1 = cc.ui.UIImage.new("rbing.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rz2 = cc.ui.UIImage.new("rbing.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rz3 = cc.ui.UIImage.new("rbing.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rz4 = cc.ui.UIImage.new("rbing.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
-    img_rz5 = cc.ui.UIImage.new("rbing.png")
-                -- :align(display.CENTER, display.cx, 500)
-                :setLayoutSize(109, 109)
-                :setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
 
-    print("tag:"..img_selected:getTag())
-
-    chessPieces = {img_rc1,img_rc2,img_rm1,img_rm2,img_rp1,img_rp2,img_rz1,img_rz2,img_rz3,img_rz4,img_rz5,img_rx1,img_rx2,img_rs1,img_rs2,img_rj,img_bc1,img_bc2,img_bm1,img_bm2,img_bp1,img_bp2,img_bz1,img_bz2,img_bz3,img_bz4,img_bz5,img_bx1,img_bx2,img_bs1,img_bs2,img_bj}
-
-end
-
-function MainScene:initBoard()
-    chessBoard  = {{1,0,0,7,0,0,27,0,0,18},{3,0,5,0,0,0,0,22,0,20},{12,0,0,8,0,0,26,0,0,29},{14,0,0,0,0,0,0,0,0,31},{16,0,0,9,0,0,25,0,0,32},{15,0,0,0,0,0,0,0,0,30},{13,0,0,10,0,0,24,0,0,28},{4,0,6,0,0,0,0,21,0,19},{2,0,0,11,0,0,23,0,0,17},{0,0}}
-end
 
 return MainScene

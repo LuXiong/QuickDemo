@@ -2,9 +2,9 @@
 {
 	gl.supports_vertex_array_object: true
 	cocos2d.x.version: quick-cocos2d-x 3.3
-	gl.vendor: Intel Inc.
+	gl.vendor: NVIDIA Corporation
 	gl.supports_PVRTC: false
-	gl.renderer: Intel(R) Iris(TM) Graphics 6100
+	gl.renderer: NVIDIA GeForce GT 750M OpenGL Engine
 	cocos2d.x.compiled_with_profiler: false
 	gl.max_texture_size: 16384
 	gl.supports_ETC1: false
@@ -13,7 +13,7 @@
 	gl.supports_discard_framebuffer: false
 	gl.supports_NPOT: true
 	gl.supports_S3TC: true
-	gl.version: 2.1 INTEL-10.12.13
+	gl.version: 2.1 NVIDIA-10.8.14 310.42.15f01
 	gl.supports_ATITC: false
 	gl.max_texture_units: 16
 	cocos2d.x.compiled_with_gl_state_cache: true
@@ -22,7 +22,7 @@
 
 Quick-Cocos2d-x C++ support ready.
 ------------------------------------------------
-LOAD LUA FILE: /Users/xionglu/QuickDemo/chess/src/main.lua
+LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
 ------------------------------------------------
 [LUA-print] ===========================================================
 [LUA-print]               LOAD QUICK FRAMEWORK
@@ -33,32 +33,11 @@ LOAD LUA FILE: /Users/xionglu/QuickDemo/chess/src/main.lua
 [LUA-print] [INFO] # device.platform              = mac
 [LUA-print] [INFO] # device.model                 = unknown
 [LUA-print] [INFO] # device.language              = cn
-[LUA-print] [INFO] # device.writablePath          = /Users/xionglu/QuickDemo/chess/
+[LUA-print] [INFO] # device.writablePath          = /Users/xiongl/QuickDemo/chess/
 [LUA-print] [INFO] # device.directorySeparator    = /
 [LUA-print] [INFO] # device.pathSeparator         = :
 [LUA-print] [INFO] #
 libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
-[LUA-print] [INFO] # CONFIG_SCREEN_WIDTH          = 1280.00
-[LUA-print] [INFO] # CONFIG_SCREEN_HEIGHT         = 721.13
-[LUA-print] [INFO] # display.widthInPixels        = 1136.00
-[LUA-print] [INFO] # display.heightInPixels       = 640.00
-[LUA-print] [INFO] # display.contentScaleFactor   = 0.89
-[LUA-print] [INFO] # display.width                = 1280.00
-[LUA-print] [INFO] # display.height               = 721.13
-[LUA-print] [INFO] # display.cx                   = 640.00
-[LUA-print] [INFO] # display.cy                   = 360.56
-[LUA-print] [INFO] # display.left                 = 0.00
-[LUA-print] [INFO] # display.right                = 1280.00
-[LUA-print] [INFO] # display.top                  = 721.13
-[LUA-print] [INFO] # display.bottom               = 0.00
-[LUA-print] [INFO] # display.c_left               = -640.00
-[LUA-print] [INFO] # display.c_right              = 640.00
-[LUA-print] [INFO] # display.c_top                = 360.56
-[LUA-print] [INFO] # display.c_bottom             = -360.56
-[LUA-print] [INFO] #
-libpng warning: iCCP: known incorrect sRGB profile
-CCSize will be not binded in lua,please use the lua's table instead
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
@@ -74,5 +53,4 @@ libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-[LUA-print] tag:-1
+[LUA ERROR] [string "app/scenes/MainScene.lua"]:10: bad argument #1 to 'pairs' (table expected, got nil)
