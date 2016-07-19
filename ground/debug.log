@@ -22,7 +22,7 @@
 
 Quick-Cocos2d-x C++ support ready.
 ------------------------------------------------
-LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
+LOAD LUA FILE: /Users/xiongl/QuickDemo/ground/src/main.lua
 ------------------------------------------------
 [LUA-print] ===========================================================
 [LUA-print]               LOAD QUICK FRAMEWORK
@@ -33,26 +33,8 @@ LOAD LUA FILE: /Users/xiongl/QuickDemo/chess/src/main.lua
 [LUA-print] [INFO] # device.platform              = mac
 [LUA-print] [INFO] # device.model                 = unknown
 [LUA-print] [INFO] # device.language              = cn
-[LUA-print] [INFO] # device.writablePath          = /Users/xiongl/QuickDemo/chess/
+[LUA-print] [INFO] # device.writablePath          = /Users/xiongl/QuickDemo/ground/
 [LUA-print] [INFO] # device.directorySeparator    = /
 [LUA-print] [INFO] # device.pathSeparator         = :
 [LUA-print] [INFO] #
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-libpng warning: iCCP: known incorrect sRGB profile
-CCSize will be not binded in lua,please use the lua's table instead
-libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
