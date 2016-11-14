@@ -36,6 +36,7 @@ local n_voiceOpen = 1
 local chessScale = 1
 -- 走棋记录
 local ChessRecord = require("app.scenes.ChessRecord")
+print("ChessRecord:"..tostring(ChessRecord))
 local chessRecord = ChessRecord.new()
 
 -- 控制棋盘的缩放比例，使得棋盘适配屏幕左边
@@ -300,13 +301,10 @@ function MainScene:changeVoiceState()
     n_voiceOpen = n_voiceOpen * -1
 end
 
-
 function MainScene:onEnter()
 end
 
 function MainScene:onExit()
 end
-
-
 
 return MainScene

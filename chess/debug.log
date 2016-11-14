@@ -53,6 +53,7 @@ libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] ChessRecord:table: 0x7fcf9a767eb0
 CCSize will be not binded in lua,please use the lua's table instead
 libpng warning: iCCP: known incorrect sRGB profile
 libpng warning: iCCP: known incorrect sRGB profile
